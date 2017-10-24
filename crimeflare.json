@@ -5,8 +5,8 @@
   "pdo": {
     "host": "127.0.0.1",
     "db": "crimeflare",
-    "user": "crimflare",
-    "pass": "kqkool7ayhqwuquii",
+    "user": "crimeflare",
+    "pass": "MakeSureIamSecure",
     "charset": "utf8",
     "timeout": 120
   },
