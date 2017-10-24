@@ -1,5 +1,5 @@
 {
-    "name": "arikin/crimeflare_import",
+    "name": "arikin/crimeflare",
     "description": "Download and decompress data files from www.crimeflare.us",
     "type": "project",
     "license": "MIT",
