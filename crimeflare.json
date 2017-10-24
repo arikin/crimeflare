@@ -1,0 +1,48 @@
+{
+  "base_dir": "/tmp/crimeflare",
+  "base_url": "http://crimeflare.net:82/domains",
+  "curl_timeout": 300,
+  "pdo": {
+    "host": "127.0.0.1",
+    "db": "crimeflare",
+    "user": "crimflare",
+    "pass": "kqkool7ayhqwuquii",
+    "charset": "utf8",
+    "timeout": 120
+  },
+  "crimeflare": {
+    "ipout": {
+      "file": "ipout",
+      "sql": {
+        "table": "crimeflare_ip",
+        "fields": [
+          "updated_at",
+          "domain",
+          "ip_address"
+        ]
+      }
+    },
+    "nsout": {
+      "file": "nsout",
+      "sql": {
+        "table": "crimeflare_ns",
+        "fields": [
+          "nsone",
+          "nstwo",
+          "domain"
+        ]
+      }
+    },
+    "country": {
+      "file": "country",
+      "sql": {
+        "table": "crimeflare_country",
+        "fields": [
+          "domain",
+          "ip_address",
+          "country"
+        ]
+      }
+    }
+  }
+}
