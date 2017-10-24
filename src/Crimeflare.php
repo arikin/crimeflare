@@ -7,8 +7,8 @@
 
 namespace Arikin;
 
-use \DownloadExtract;
-use \DbUpdate;
+use Arikin\DownloadExtract as DownloadExtract;
+use Arikin\DbUpdate as DbUpdate;
 
 class Crimeflare
 {
@@ -44,7 +44,7 @@ class Crimeflare
 
     public function update()
     {
-        $dl = new \Arikin\DownloadExtract(array(
+        $dl = new DownloadExtract(array(
             'base_url' => $this->settings['base_url'],
             'base_dir' => $this->settings['base_dir'],
             'fetch_curl_timeout' => $this->settings['curl_timeout'],
