@@ -2,6 +2,7 @@
     "name": "arikin/crimeflare",
     "description": "Download and decompress data files from www.crimeflare.us",
     "version": "0.1.0",
+    "minimum-stability": "dev",
     "type": "project",
     "license": "MIT",
     "authors": [
