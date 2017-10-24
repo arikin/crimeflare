@@ -78,7 +78,6 @@ class DownloadExtract
 
     /**
      * Download the zip file
-     * ToDo: substitute curl with - file_get_contents
      * @param $file
      */
     private function fetchZip($file)

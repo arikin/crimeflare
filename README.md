@@ -73,7 +73,7 @@ $crime->update();
 
 The PDO was separated out so you could provide your own if needed. Change the use statement inside **src/Crimeflare.php**.
 ```php
-use \Arikin\DbUpdate;
+use \DbUpdate;
 ```
 And then provide a method to drop and create the tables like in **src/DbUpdate.php**.
 ```php
