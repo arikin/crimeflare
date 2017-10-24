@@ -7,8 +7,8 @@
 
 namespace Arikin;
 
-use \Arikin\DownloadExtract;
-use \Arikin\DbUpdate;
+use \DownloadExtract;
+use \DbUpdate;
 
 class Crimeflare
 {
@@ -31,7 +31,7 @@ class Crimeflare
     private $delimiter;
 
     /**
-     *
+     * Parameter Bind Limit
      * @var integer
      */
     private $binding_limit;
