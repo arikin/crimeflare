@@ -99,7 +99,7 @@ class Crimeflare
     private function getFileSqlHead($details)
     {
         $sql = sprintf("INSERT INTO `%s` (", $details['sql']['table'])
-            . implode(", ", $details['sql']['fields'])
+            . implode(", ", array_keys($details['sql']['fields']))
             . ") VALUES "; // trailing space required
 
         return $sql;
@@ -109,6 +109,31 @@ class Crimeflare
     {
         $placeholder = '(' . implode(',', array_fill(0, count($details['sql']['fields']), '?')) . ')';
         return $placeholder;
+    }
+
+    public function dropTable($table = FALSE)
+    {
+        if($table) {
+            $sql = sprintf("DROP TABLE IF EXISTS `%s`", $table);
+            return $this->pdo->query($sql);
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function createTable($table = FALSE, $fields = FALSE)
+    {
+        if($table && $fields) {
+            $sql = sprintf("CREATE TABLE IF NOT EXISTS `%s` (", $table);
+            $sql .= "id INT AUTO_INCREMENT NOT NULL";
+            foreach($fields as $name => $data_type) {
+                $sql .= ", " . $name . " " . $data_type;
+            }
+            $sql .= ", PRIMARY KEY (id))";
+            return $this->pdo->query($sql);
+        } else {
+            return FALSE;
+        }
     }
 
     private function importData($path)
