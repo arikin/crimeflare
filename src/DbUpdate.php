@@ -22,29 +22,4 @@ class DbUpdate extends \PDO
         $options = array_replace($default_options, $options);
         parent::__construct($dsn, $username, $password, $options);
     }
-
-    public function dropTable($table = FALSE)
-    {
-        if($table) {
-            $sql = sprintf("DROP TABLE IF EXISTS `%s`", $table);
-            return $this->query($sql);
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function createTable($table = FALSE, $fields = FALSE)
-    {
-        if($table && $fields) {
-            $sql = sprintf("CREATE TABLE IF NOT EXISTS `%s` (", $table);
-            $sql .= "id INT AUTO_INCREMENT NOT NULL";
-            foreach($fields as $field_line) {
-                $sql .= $field_line;
-            }
-            $sql .= ", PRIMARY KEY (id))";
-            return $this->query($sql);
-        } else {
-            return FALSE;
-        }
-    }
 }
