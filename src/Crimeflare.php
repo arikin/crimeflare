@@ -61,8 +61,8 @@ class Crimeflare
                 $data = $this->importData($path, $this->delimiter);
                 $this->setPdo();
                 // Tables would be too big and have duplicate data
-                $this->pdo->dropTable($file_sql['table']);
-                $this->pdo->createTable($file_sql['table'], $file_sql['fields']);
+                $this->dropTable($file_sql['table']);
+                $this->createTable($file_sql['table'], $file_sql['fields']);
                 $this->chunkInsert($data, $file);
                 // To prevent timeouts for large tables.
                 $this->closePdo();
