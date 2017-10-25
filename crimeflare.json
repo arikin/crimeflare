@@ -43,6 +43,15 @@
           "country": "VARCHAR(255)"
           }
       }
+    },
+    "sslinfo": {
+      "file": "sslinfo",
+      "sql": {
+        "table": "crimflare_ssl",
+        "fields": {
+          "s": "1"
+        }
+      }
     }
   }
 }

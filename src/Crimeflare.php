@@ -58,7 +58,7 @@ class Crimeflare
         foreach($extracted as $file => $path) {
             if(!is_null($path)) {
                 $file_sql = $this->settings['crimeflare'][$file]['sql'];
-                $data = $this->importData($path, $this->delimiter);
+                $data = $this->importData($path.$file);
                 $this->setPdo();
                 // Tables would be too big and have duplicate data
                 $this->dropTable($file_sql['table']);
