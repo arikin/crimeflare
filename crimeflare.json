@@ -15,33 +15,33 @@
       "file": "ipout",
       "sql": {
         "table": "crimeflare_ip",
-        "fields": [
-          "updated_at",
-          "domain",
-          "ip_address"
-        ]
+        "fields": {
+          "updated_at": "VARCHAR(255)",
+          "domain": "VARCHAR(255)",
+          "ip_address": "VARCHAR(255)"
+        }
       }
     },
     "nsout": {
       "file": "nsout",
       "sql": {
         "table": "crimeflare_ns",
-        "fields": [
-          "nsone",
-          "nstwo",
-          "domain"
-        ]
+        "fields": {
+          "nsone": "VARCHAR(255)",
+          "nstwo": "VARCHAR(255)",
+          "domain": "VARCHAR(255)"
+        }
       }
     },
     "country": {
       "file": "country",
       "sql": {
         "table": "crimeflare_country",
-        "fields": [
-          "domain",
-          "ip_address",
-          "country"
-        ]
+        "fields": {
+          "domain": "VARCHAR(255)",
+          "ip_address": "VARCHAR(255)",
+          "country": "VARCHAR(255)"
+          }
       }
     }
   }
