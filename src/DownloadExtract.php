@@ -35,6 +35,11 @@ class DownloadExtract
     private $uri_base;
 
     /**
+     * @var integer
+     */
+    private $uri_port;
+
+    /**
      * Curl Timeout in seconds
      * @var integer
      */
@@ -96,6 +101,9 @@ class DownloadExtract
         curl_setopt($ch_start, CURLOPT_TIMEOUT, $this->fetch_curl_timeout);
         curl_setopt($ch_start, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch_start, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch_start, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch_start, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
+        curl_setopt($ch_start,CURLOPT_PORT, $this->uri_port);
         curl_setopt($ch_start, CURLOPT_FILE, $local_handle);
 
         $page = curl_exec($ch_start);
@@ -176,6 +184,12 @@ class DownloadExtract
         } else {
             // Default
             $this->setupDir('/tmp/crimeflare');
+        }
+        // Nonstandard port used...
+        if(isset($options['base_port'])) {
+            $this->setUriPort($options['base_port']);
+        } else {
+            $this->setUriPort(82);
         }
         // Curl timeout in seconds
         if(isset($options['fetch_curl_timeout'])) {
@@ -265,4 +279,21 @@ class DownloadExtract
     {
         return $this->fetch_curl_timeout;
     }
+
+    /**
+     * @return int
+     */
+    public function getUriPort()
+    {
+        return $this->uri_port;
+    }
+
+    /**
+     * @param int $uri_port
+     */
+    public function setUriPort($uri_port)
+    {
+        $this->uri_port = $uri_port;
+    }
+
 }
