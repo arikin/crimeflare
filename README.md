@@ -59,9 +59,9 @@ The keys are the filename without any prefixes or suffixes. Here is a sample of 
     - **ipout: sql** - Array of settings for the SQL and parsing the data file
     - **ipout: sql: table** - Name for table used for this file's data. A prefix is suggested as the tables will be Dropped and Created.
     - **ipout: sql: fields** - Array of fields. Each line is split on the space character. Order here is important. Index 0 is the data on the far left of the line.
-      - **ipout: sql: fields: updated_at** - Datetime from data file.
-      - **ipout: sql: fields: domain** - Domain
-      - **ipout: sql: fields: ip_address** - IP address
+      - **ipout: sql: fields: updated_at** - First column name to use with datatype to use in table creation
+      - **ipout: sql: fields: domain** - Second column name to use with datatype to use in table creation
+      - **ipout: sql: fields: ip_address** - Third column name to use with datatype to use in table creation
 
 ### Notes
 The inserts per table are done in groups of 20,000 records by default. If your DB can handle more parameter binds then set a new integer limit based on this formula before using the update method:
