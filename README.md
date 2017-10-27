@@ -33,7 +33,7 @@ $crime->update();
 
 Please note that the Crimeflare data files are rather large. Each file is handled one at a time and line by line, but creating the sql INSERT statements does take up memory.  So be sure to set the memory limit for the script.
 ```php
-ini_set('memory_limit', '1G');
+ini_set('memory_limit', '2G');
 ```
 
 ### crimeflare.json
@@ -48,7 +48,7 @@ JSON formated settings file. Below is a description of settings:
   - **pdo: user** - Username for mysql user
   - **pdo: pass** - Password for that user
   - **pdo: charset** - Character set to use in connecting to the database
-  - **pdo: timeout** - Array of options for PDO connection. ToDo:
+  - **pdo: timeout** - PDO timeout in seconds.
 
 - **crimeflare** - Array of values for each Crimeflare data file. See below for an example of **ipout.zip**.
 
@@ -59,9 +59,9 @@ The keys are the filename without any prefixes or suffixes. Here is a sample of 
     - **ipout: sql** - Array of settings for the SQL and parsing the data file
     - **ipout: sql: table** - Name for table used for this file's data. A prefix is suggested as the tables will be Dropped and Created.
     - **ipout: sql: fields** - Array of fields. Each line is split on the space character. Order here is important. Index 0 is the data on the far left of the line.
-      - **ipout: sql: fields: updated_at** - Datetime from data file.
-      - **ipout: sql: fields: domain** - Domain
-      - **ipout: sql: fields: ip_address** - IP address
+      - **ipout: sql: fields: updated_at** - First column name to use with datatype to use in table creation
+      - **ipout: sql: fields: domain** - Second column name to use with datatype to use in table creation
+      - **ipout: sql: fields: ip_address** - Third column name to use with datatype to use in table creation
 
 ### Notes
 The inserts per table are done in groups of 20,000 records by default. If your DB can handle more parameter binds then set a new integer limit based on this formula before using the update method:
@@ -74,31 +74,4 @@ $crime->update();
 The PDO was separated out so you could provide your own if needed. Change the use statement inside **src/Crimeflare.php**.
 ```php
 use \DbUpdate;
-```
-And then provide a method to drop and create the tables like in **src/DbUpdate.php**.
-```php
-    public function dropTable($table = FALSE)
-    {
-        if($table) {
-            $sql = sprintf("DROP TABLE IF EXISTS `%s`", $table);
-            return $this->query($sql);
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function createTable($table = FALSE, $fields = FALSE)
-    {
-        if($table && $fields) {
-            $sql = sprintf("CREATE TABLE IF NOT EXISTS `%s` (", $table);
-            $sql .= "id INT AUTO_INCREMENT NOT NULL";
-            foreach($fields as $field_line) {
-                $sql .= $field_line;
-            }
-            $sql .= ", PRIMARY KEY (id))";
-            return $this->query($sql);
-        } else {
-            return FALSE;
-        }
-    }
 ```
