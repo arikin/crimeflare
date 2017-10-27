@@ -47,6 +47,7 @@ class Crimeflare
         $dl = new DownloadExtract(array(
             'base_url' => $this->settings['base_url'],
             'base_dir' => $this->settings['base_dir'],
+            'base_port' => $this->settings['base_port'],
             'fetch_curl_timeout' => $this->settings['curl_timeout'],
         ));
         // Get files
