@@ -1,6 +1,7 @@
 {
   "base_dir": "/tmp/crimeflare",
   "base_url": "http://crimeflare.net:82/domains",
+  "base_port": 82,
   "curl_timeout": 300,
   "pdo": {
     "host": "127.0.0.1",
@@ -42,15 +43,6 @@
           "ip_address": "VARCHAR(255)",
           "country": "VARCHAR(255)"
           }
-      }
-    },
-    "sslinfo": {
-      "file": "sslinfo",
-      "sql": {
-        "table": "crimflare_ssl",
-        "fields": {
-          "s": "1"
-        }
       }
     }
   }
