@@ -42,6 +42,57 @@ class Crimeflare
         $this->setOptions($options);
     }
 
+    /**
+     * Make any adjustments to each column
+     * IPout
+     * @param $line string
+     * @return array
+     */
+    private function formatIpout($line)
+    {
+        $result = array();
+        $split = explode($this->delimiter, trim($line));
+        $result[0] = rtrim($split[0], ':'); // datetime
+        $result[1] = $split[1]; // domain
+        $result[2] = $split[2]; // IP address
+
+        return $result;
+    }
+
+    /**
+     * Make any adjustments to each column
+     * NSout
+     * @param $line string
+     * @return array
+     */
+    private function formatNsout($line)
+    {
+        $result = array();
+        $split = explode($this->delimiter, trim($line));
+        $result[0] = $split[0] . '.ns.cloudflare.com'; // Nameserver 1
+        $result[1] = $split[1] . '.ns.cloudflare.com'; // Nameserver 2
+        $result[2] = $split[2]; // domain
+
+        return $result;
+    }
+
+    /**
+     * Make any adjustments to each column
+     * Country
+     * @param $line string
+     * @return array
+     */
+    private function formatCountry($line)
+    {
+        $result = array();
+        $split = explode($this->delimiter, trim($line));
+        $result[0] = $split[0]; // domain
+        $result[1] = $split[1]; // IP address
+        $result[2] = $split[2]; // Country (all caps)
+
+        return $result;
+    }
+
     public function update()
     {
         $dl = new DownloadExtract(array(
@@ -59,7 +110,7 @@ class Crimeflare
         foreach($extracted as $file => $path) {
             if(!is_null($path)) {
                 $file_sql = $this->settings['crimeflare'][$file]['sql'];
-                $data = $this->importData($path.$file);
+                $data = $this->importData($path, $file);
                 $this->setPdo();
                 // Tables would be too big and have duplicate data
                 $this->dropTable($file_sql['table']);
@@ -137,17 +188,23 @@ class Crimeflare
         }
     }
 
-    private function importData($path)
+    private function importData($path, $file)
     {
         $input_data = array();
-        $input_handle = fopen($path, "r");
+        $full_path = $path . $file;
+        $input_handle = fopen($full_path, "r");
         if($input_handle) {
             $index = 0;
             while(($line = fgets($input_handle)) !== FALSE) {
-                $split = explode($this->delimiter, trim($line));
                 $input_data[$index] = array();
-                foreach($split as $s) {
-                    $input_data[$index][] = $s;
+                if($file == 'ipout') {
+                    $input_data[$index] = $this->formatIpout($line);
+                } elseif($file == 'nsout') {
+                    $input_data[$index] = $this->formatNsout($line);
+                } elseif($file == 'country') {
+                    $input_data[$index] = $this->formatCountry($line);
+                } else {
+                    $input_data[$index] = explode($this->delimiter, trim($line));
                 }
                 $index++;
             }
