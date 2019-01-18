@@ -1,7 +1,7 @@
 {
   "base_dir": "/tmp/crimeflare",
   "base_url": "http://crimeflare.net:82/domains",
-  "base_port": 82,
+  "base_port": 83,
   "curl_timeout": 300,
   "pdo": {
     "host": "127.0.0.1",
