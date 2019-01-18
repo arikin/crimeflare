@@ -40,7 +40,7 @@ ini_set('memory_limit', '2G');
 JSON formated settings file. Below is a description of settings:
 
 - **base_dir** - Full path to base directory. No trailing slash. In here the download/ and extract/ directories are created. **Important** the data files are not deleted after finishing. Please do this in your script to save space.
-- **base_url** - Base url to files. No trailing slash. Default is: http://crimeflare.net:82/domains
+- **base_url** - Base url to files. No trailing slash. Default is: http://crimeflare.net:83/domains
 - **curl_timeout** - Timeout for fetching each file.
 - **pdo** - Array of PDO object settings
   - **pdo: host** - IP or domain of mysql server
